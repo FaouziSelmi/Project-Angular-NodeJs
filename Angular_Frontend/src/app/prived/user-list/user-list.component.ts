@@ -24,4 +24,13 @@ users : User[];
      // console.log(data);
     })
     }
+
+
+    updateUser(id:number){
+      this.router.navigate(['edituser', id])
+      }
+
+      deleteUser(id:number){
+
+      }
 }
