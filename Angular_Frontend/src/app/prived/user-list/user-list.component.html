@@ -1,1 +1,59 @@
-<p>user-list works!</p>
+
+<h2 >قامة المستعملين</h2>
+<!-- 
+<div class="card">
+
+  <div id="collapseTwo" class="collapse1" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div class="card-body">
+
+      <div class="col-md-3 offset-md-3">
+      <select   class="input "  name="idDir"  id="idDir"  class="form-select"  #mySelect
+      (change)='getEmployeByDir(mySelect.value)' >
+      <option   value="null" >اختيار ادارة</option>
+        <option *ngFor="let direction of directions"  value="{{direction.idDir}}" >{{direction.nomDir}}</option>
+      </select>
+    </div> 
+    </div> 
+  </div>
+
+</div> -->
+
+<!-- <nav class="navbar">
+  <input class="form-control" type="text" name="firstName" [(ngModel)]="firstName" 
+  (ngModelChange)="search()" placeholder=" entrer first name to search">
+  
+</nav> -->
+
+<table class="table table-striped ">
+ <thead>
+     <tr>
+        <th >المعرف &nbsp;<i class="fa fa-sort"></i></th>
+        <th >الاسم &nbsp;<i class="fa fa-sort"></i></th>
+         <th>اللقب</th>
+         <th>البريد الالكتروني</th>
+         <th>كلمة العبور</th>
+         <th>دور المستخدم</th>
+         <th style="display: none2;">رمز الادارة</th>
+     
+       <th>خيارات</th>
+     </tr>
+ </thead>
+        <tbody>
+            <tr *ngFor ="let user of users">
+                 <td>{{user.identifiant}}</td>
+                 <td>{{user.prenom}}</td>
+                 <td>{{user.nom}}</td>
+                 <td>{{user.email}}</td>
+                 <td>{{user.password}}</td>
+                 <td>{{user.roleuser}}</td>
+                 <td style="display: none2;">{{user.idDir}}</td>
+                 <!-- <td>{{user.nomDir}}</td> -->
+                 <td>
+                   <!-- <button   (click)="updateEmployee(employee.idEmp)" class="btn btn-info" data-toggle="tooltip"  title="تحيين "><i class="fa fa-edit"></i></button>
+                   <button   (click)="deleteEmployee(employee.idEmp)" class="btn btn-danger" style="margin-right:10px ;"><i class="fa fa-trash"></i></button>
+                   <button (click)="detailsEmployee(employee.idEmp)" class="btn btn-warning " style="margin-right:10px ;"><i class="fa fa-bars"></i></button> -->
+                 </td>
+            </tr>
+        </tbody>
+        <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+</table>

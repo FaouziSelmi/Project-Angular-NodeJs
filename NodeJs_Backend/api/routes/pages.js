@@ -5,7 +5,7 @@ const dbConnection= require('../connection/connection');
 
 
 
-router.get('/appmfpe', (req,res) =>{
+router.get('/users', (req,res) =>{
     dbConnection.query('select * from users', (err, rows, fields)=>{
         if(!err){
             res.json(rows);
