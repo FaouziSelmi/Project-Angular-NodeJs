@@ -1,5 +1,4 @@
-
-<h2 >قامة المستعملين</h2>
+<h2>قامة المستعملين</h2>
 <!-- 
 <div class="card">
 
@@ -25,35 +24,81 @@
 </nav> -->
 
 <table class="table table-striped ">
- <thead>
-     <tr>
-        <th >المعرف &nbsp;<i class="fa fa-sort"></i></th>
-        <th >الاسم &nbsp;<i class="fa fa-sort"></i></th>
-         <th>اللقب</th>
-         <th>البريد الالكتروني</th>
-         <th>كلمة العبور</th>
-         <th>دور المستخدم</th>
-         <th style="display: none2;">رمز الادارة</th>
-     
-       <th>خيارات</th>
-     </tr>
- </thead>
-        <tbody>
-            <tr *ngFor ="let user of users">
-                 <td>{{user.identifiant}}</td>
-                 <td>{{user.prenom}}</td>
-                 <td>{{user.nom}}</td>
-                 <td>{{user.email}}</td>
-                 <td>{{user.password}}</td>
-                 <td>{{user.roleuser}}</td>
-                 <td style="display: none2;">{{user.idDir}}</td>
-                 <!-- <td>{{user.nomDir}}</td> -->
-                 <td>
-                    <button   (click)="updateUser(user.identifiant)" class="btn btn-info" data-toggle="tooltip"  title="تحيين "><i class="fa fa-edit"></i></button>
-                   <button   (click)="deleteUser(user.identifiant)" class="btn btn-danger" style="margin-right:10px ;"><i class="fa fa-trash"></i></button>
-                  <button  class="btn btn-warning " style="margin-right:10px ;"><i class="fa fa-bars"></i></button> 
-                 </td>
-            </tr>
-        </tbody>
-        <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+  <thead>
+    <tr>
+      <th>المعرف &nbsp;<i class="fa fa-sort"></i></th>
+      <th>الاسم &nbsp;<i class="fa fa-sort"></i></th>
+      <th>اللقب</th>
+      <th>البريد الالكتروني</th>
+      <th>كلمة العبور</th>
+      <th>دور المستخدم</th>
+      <th style="display: none2;">رمز الادارة</th>
+
+      <th>خيارات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.identifiant}}</td>
+      <td>{{user.prenom}}</td>
+      <td>{{user.nom}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.password}}</td>
+      <td>{{user.roleuser}}</td>
+      <td style="display: none2;">{{user.idDir}}</td>
+      <!-- <td>{{user.nomDir}}</td> -->
+      <td>
+        <button (click)="showModalEdit(user)" class="btn btn-info" data-toggle="tooltip" title="تحيين "><i
+            class="fa fa-edit"></i></button>
+        <button (click)="deleteUser(user.identifiant)" class="btn btn-danger" style="margin-right:10px ;"><i
+            class="fa fa-trash"></i></button>
+        <button class="btn btn-warning " style="margin-right:10px ;"><i class="fa fa-bars"></i></button>
+      </td>
+    </tr>
+  </tbody>
+  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 </table>
+
+
+
+<!-- **********************************************************modal-Editer  programme********************************** -->
+<div class="modal fade" id="ModalEditSPRG" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModal}"
+  aria-hidden="true" aria-labelledby="addModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h4 class="modal-title custom_align" id="H1">
+          <i class="far fa-edit"></i> تحيين البرنامج الفرعي التالي
+        </h4>
+      </div>
+
+      <div class="modal-body" style="overflow: auto">
+        <form>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-5">
+              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer ">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" (click)="showModal=false"> حفظ</button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true" (click)="showModal=false">
+          الغاء</button>
+
+      </div>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+

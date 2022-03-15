@@ -1,0 +1,8 @@
+.modal.show{
+    display: block;
+   position: fixed;
+    padding: 30px 20px 20px 20px;
+}
+
+
+  

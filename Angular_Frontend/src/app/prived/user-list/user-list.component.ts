@@ -9,9 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  firstName: any;
-  p:number=1;
+  showModal: boolean;
+
 users : User[];
+userEdit: User=new User();
   constructor( private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -32,5 +33,13 @@ users : User[];
 
       deleteUser(id:number){
 
+      }
+      showModalEdit(user: User){
+         this.userEdit.identifiant=user.identifiant;
+         this.userEdit.prenom=user.prenom;
+         this.userEdit.nom=user.nom;
+         this.userEdit.email=user.email;
+         this.userEdit.password=user.password;
+        this.showModal=true
       }
 }
