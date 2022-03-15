@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserListComponent implements OnInit {
   showModal: boolean;
-
+  p:number=1;
 users : User[];
 userEdit: User=new User();
   constructor( private userService: UserService, private router: Router) { }
@@ -40,6 +40,25 @@ userEdit: User=new User();
          this.userEdit.nom=user.nom;
          this.userEdit.email=user.email;
          this.userEdit.password=user.password;
+         this.userEdit.roleuser=user.roleuser;
+         this.userEdit.idDir=user.idDir;
         this.showModal=true
       }
+
+      
+    // search(){
+    //   if (this.firstName==""){
+    //          this.ngOnInit();
+    //   }else{
+    //     this.employees=this.employees.filter(res =>{
+    //       return res.firstName.toLocaleLowerCase().match(this.firstName.toLocaleLowerCase());
+    //     });
+    //   }
+    // }
+    key: string='id';
+    reverse: boolean=false;
+    sort(key){
+      this.key=key;
+      this.reverse=!this.reverse
+    }
 }

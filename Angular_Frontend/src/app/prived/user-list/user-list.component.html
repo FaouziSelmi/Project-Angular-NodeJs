@@ -26,7 +26,7 @@
 <table class="table table-striped ">
   <thead>
     <tr>
-      <th>المعرف &nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('id')">المعرف &nbsp;<i class="fa fa-sort"></i></th>
       <th>الاسم &nbsp;<i class="fa fa-sort"></i></th>
       <th>اللقب</th>
       <th>البريد الالكتروني</th>
@@ -38,7 +38,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | orderBy: key: reverse | paginate:{itemsPerPage:1, currentPage:p}">
       <td>{{user.identifiant}}</td>
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
@@ -56,10 +56,8 @@
       </td>
     </tr>
   </tbody>
-  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+  <pagination-controls (pageChange)="p = $event" previousLabel="&lsaquo;" nextLabel="&rsaquo;"></pagination-controls>
 </table>
-
-
 
 <!-- **********************************************************modal-Editer  programme********************************** -->
 <div class="modal fade" id="ModalEditSPRG" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModal}"
@@ -68,22 +66,59 @@
     <div class="modal-content">
       <div class="modal-header bg-default">
         <h4 class="modal-title custom_align" id="H1">
-          <i class="far fa-edit"></i> تحيين البرنامج الفرعي التالي
+          <i class="far fa-edit"></i> تحيين بيانات المستعمل
         </h4>
       </div>
 
       <div class="modal-body" style="overflow: auto">
         <form>
           <div class="form-group row" style="margin-bottom: 10px;">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+            <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              <input type="text" class="form-control"  name="identifiant"
+              [(ngModel)]="userEdit.identifiant" placeholder=" المعرف الوحيد" disabled>
             </div>
           </div>
-          <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+              <input type="text" class="form-control" id="prenom"  name="prenom"
+              [(ngModel)]="userEdit.prenom" placeholder="  الاسم">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="nom" name="nom"
+              [(ngModel)]="userEdit.nom" placeholder="  اللقب">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
+            <div class="col-sm-5">
+              <input type="email" class="form-control" id="email" name="email"
+              [(ngModel)]="userEdit.email" placeholder="البريد الالكتروني">
+            </div>
+          </div>
+          <div class="form-group row"  style="margin-bottom: 10px;">
+            <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" id="password" name="password"
+              [(ngModel)]="userEdit.password" placeholder="كلمة العبور">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="roleuser" name="roleuser"
+              [(ngModel)]="userEdit.roleuser" placeholder=" دور المستخدم ">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="dir" name="dir"
+              [(ngModel)]="userEdit.idDir" placeholder="  الادارة">
             </div>
           </div>
         </form>
