@@ -1,0 +1,25 @@
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary"  (click)="showModal=true"  >
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal " id="exampleModal"  [ngClass]="{'show':showModal}" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        </div>
+
+        <div class="modal-body">
+          ...
+        </div>
+
+        <div class="modal-footer">
+          <button type="button"  (click)="showModal=false" class="btn btn-secondary" >Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

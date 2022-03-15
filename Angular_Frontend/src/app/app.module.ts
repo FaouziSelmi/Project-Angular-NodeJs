@@ -6,18 +6,22 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './prived/user-list/user-list.component';
 import { UpdateUserComponent } from './prived/update-user/update-user.component';
 import{ HttpClientModule,} from '@angular/common/http';
+import { LoginComponent } from './public/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
