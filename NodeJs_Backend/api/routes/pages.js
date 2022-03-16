@@ -4,8 +4,6 @@ const router= express.Router();
 
 const dbConnection= require('../connection/connection');
 
-
-
 router.get('/users', (req,res) =>{
     dbConnection.query('select * from users', (err, rows, fields)=>{
         if(!err){
@@ -15,13 +13,21 @@ router.get('/users', (req,res) =>{
         }
     })
 });
+router.post('/users', (req, res)=> {
+    sqlquery=`insert into users(identifiant,nom,prenom,email,password,idDir,roleuser) values
+    ("${req.body.identifiant}","${req.body.nom}","${req.body.prenom}","${req.body.email}",
+    "${req.body.password}","${req.body.idDir}","${req.body.roleuser}")`;
+    dbConnection.query(sqlquery, (err, result)=> {
+      if (err) throw err;
+     //res.send('data inserted successfully');
+     res.status(201).send({message: 'data inserted successfully'});
+    });
+  });
 router.delete('/users', (req,res) =>{
     dbConnection.query('delete from users where identifiant=?', req.body.id, (err, rows, fields)=>{
         if(!err){
           // res.send(" recode data supprimé"); erreur parsing json response
-        res.status(201).send({message: 'delete successfully'});
-           
-            
+        res.status(201).send({message: 'delete successfully'});        
         }else{
             console.log(err);
         }

@@ -13,13 +13,17 @@ export class UserService {
   getUsers(): Observable<User[]>{
     return this.httpClient.get<User[]> (`${this.baseURL}`+ 'users');
   }
-
+  addUser(user:User): Observable<object>{
+    console.log (user)
+    return this.httpClient.post(`${this.baseURL}`+'users',user);
+  }
+  updateUser(user:User): Observable<Object>{
+    // console.log (user)
+    return this.httpClient.put(`${this.baseURL}`+'users',user);
+   }
   deleteUser(id:number): Observable<Object>{ 
     return this.httpClient.delete(`${this.baseURL}`+'users',{"body":{"id":id}});
    }
 
-   updateUser(user:User): Observable<Object>{
-    // console.log (user)
-    return this.httpClient.put(`${this.baseURL}`+'users',user);
-   }
+   
 }

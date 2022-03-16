@@ -12,9 +12,10 @@ export class UserListComponent implements OnInit {
   showModaledit: boolean;
   showModaldelete:boolean
   iduserdelete:number;
+  showModaladd:boolean;
   p:number=1;
 users :any=[];
-userEdit: User=new User();
+user: User=new User();
   constructor( private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,10 +29,19 @@ userEdit: User=new User();
     })
     }
 
-
+    addUser(){
+      this.userService.addUser(this.user).subscribe(data =>{
+       // console.log(JSON.parse(JSON.stringify(data)));
+       this.ngOnInit();
+       
+      })
+      //error =>console.log(error));
+      this.showModaladd=false;     
+    }
     updateUser(){
-      this.userService.updateUser(this.userEdit).subscribe((resultat)=>{
+      this.userService.updateUser(this.user).subscribe((resultat)=>{
         this.ngOnInit();
+        this.user=new User();
       });
       this.showModaledit=false; 
       }
@@ -49,16 +59,19 @@ userEdit: User=new User();
       }
 
       showModalEdit(user: User){
-         this.userEdit.identifiant=user.identifiant;
-         this.userEdit.prenom=user.prenom;
-         this.userEdit.nom=user.nom;
-         this.userEdit.email=user.email;
-         this.userEdit.password=user.password;
-         this.userEdit.roleuser=user.roleuser;
-         this.userEdit.idDir=user.idDir;
+         this.user.identifiant=user.identifiant;
+         this.user.prenom=user.prenom;
+         this.user.nom=user.nom;
+         this.user.email=user.email;
+         this.user.password=user.password;
+         this.user.roleuser=user.roleuser;
+         this.user.idDir=user.idDir;
         this.showModaledit=true
       }
-
+    closeModalEdit(){
+      this.showModaledit=false;
+      this.user=new User();
+    }
       
     // search(){
     //   if (this.firstName==""){

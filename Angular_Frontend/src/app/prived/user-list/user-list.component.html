@@ -1,4 +1,8 @@
-<h2>قامة المستعملين</h2>
+<h1 class="text-center">قائمة المستعملين</h1>
+<h5>اضافة مستعمل 
+  <button type="button" class="btn btn-success"  (click)="showModaladd=true"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+</h5>
+
 <!-- 
 <div class="card">
 
@@ -33,7 +37,6 @@
       <th>كلمة العبور</th>
       <th>دور المستخدم</th>
       <th style="display: none2;">رمز الادارة</th>
-
       <th>خيارات</th>
     </tr>
   </thead>
@@ -58,8 +61,79 @@
   </tbody>
   <pagination-controls (pageChange)="p = $event" previousLabel="&lsaquo;" nextLabel="&rsaquo;"></pagination-controls>
 </table>
+<!-- **********************************************************modal-Add  ********************************** -->
+<div class="modal fade" id="Modaladd" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModaladd}"
+  aria-hidden="true" aria-labelledby="addModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h4 class="modal-title custom_align" id="H1">
+          <i class="fa fa-plus-square"></i>   اضافة مستعمل
+        </h4>
+      </div>
 
-<!-- **********************************************************modal-Editer  programme********************************** -->
+      <div class="modal-body" style="overflow: auto">
+        <form>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control"  name="identifiant"
+              [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" >
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="prenom"  name="prenom"
+              [(ngModel)]="user.prenom" placeholder="  الاسم">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="nom" name="nom"
+              [(ngModel)]="user.nom" placeholder="  اللقب">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
+            <div class="col-sm-5">
+              <input type="email" class="form-control" id="email" name="email"
+              [(ngModel)]="user.email" placeholder="البريد الالكتروني">
+            </div>
+          </div>
+          <div class="form-group row"  style="margin-bottom: 10px;">
+            <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" id="password" name="password"
+              [(ngModel)]="user.password" placeholder="كلمة العبور">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="roleuser" name="roleuser"
+              [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
+            </div>
+          </div>
+          <div class="form-group row" style="margin-bottom: 10px;">
+            <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="dir" name="dir"
+              [(ngModel)]="user.idDir" placeholder="  الادارة">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer ">
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" (click)="addUser()"> حفظ</button>
+        <button class="btn btn-dark" data-dismiss="modal" aria-hidden="true" (click)="showModaladd=false">
+          الغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- **********************************************************modal-Editer  ********************************** -->
 <div class="modal fade" id="ModalEditSPRG" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModaledit}"
   aria-hidden="true" aria-labelledby="addModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
@@ -76,62 +150,62 @@
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
               <input type="text" class="form-control"  name="identifiant"
-              [(ngModel)]="userEdit.identifiant" placeholder=" المعرف الوحيد" disabled>
+              [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" disabled>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
               <input type="text" class="form-control" id="prenom"  name="prenom"
-              [(ngModel)]="userEdit.prenom" placeholder="  الاسم">
+              [(ngModel)]="user.prenom" placeholder="  الاسم">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
             <div class="col-sm-5">
               <input type="text" class="form-control" id="nom" name="nom"
-              [(ngModel)]="userEdit.nom" placeholder="  اللقب">
+              [(ngModel)]="user.nom" placeholder="  اللقب">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
             <div class="col-sm-5">
               <input type="email" class="form-control" id="email" name="email"
-              [(ngModel)]="userEdit.email" placeholder="البريد الالكتروني">
+              [(ngModel)]="user.email" placeholder="البريد الالكتروني">
             </div>
           </div>
           <div class="form-group row"  style="margin-bottom: 10px;">
             <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
             <div class="col-sm-5">
               <input type="password" class="form-control" id="password" name="password"
-              [(ngModel)]="userEdit.password" placeholder="كلمة العبور">
+              [(ngModel)]="user.password" placeholder="كلمة العبور">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
             <div class="col-sm-5">
               <input type="text" class="form-control" id="roleuser" name="roleuser"
-              [(ngModel)]="userEdit.roleuser" placeholder=" دور المستخدم ">
+              [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
             <div class="col-sm-5">
               <input type="text" class="form-control" id="dir" name="dir"
-              [(ngModel)]="userEdit.idDir" placeholder="  الادارة">
+              [(ngModel)]="user.idDir" placeholder="  الادارة">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer ">
         <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" (click)="updateUser()"> حفظ</button>
-        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true" (click)="showModaledit=false">
+        <button class="btn btn-dark" data-dismiss="modal" aria-hidden="true" (click)="closeModalEdit()">
           الغاء</button>
       </div>
     </div>
   </div>
 </div>
-
+<!-- **********************************************************modal-confirm delete  ********************************** -->
 <div id="ModaldeleteConfirm" class="modal fade"  [ngClass]="{'show': showModaldelete}"
 aria-hidden="true">
 <div class="modal-dialog">
@@ -156,4 +230,4 @@ aria-hidden="true">
     </div>
 </div>
 </div>
-<button type="button" class="btn btn-danger"  (click)="ngOnInit()">refresh</button>
+
