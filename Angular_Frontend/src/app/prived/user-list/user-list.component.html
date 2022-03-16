@@ -38,7 +38,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users | orderBy: key: reverse | paginate:{itemsPerPage:1, currentPage:p}">
+    <tr *ngFor="let user of users  | orderBy: key: reverse | paginate:{itemsPerPage:4, currentPage:p}">
       <td>{{user.identifiant}}</td>
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
@@ -50,7 +50,7 @@
       <td>
         <button (click)="showModalEdit(user)" class="btn btn-info" data-toggle="tooltip" title="تحيين "><i
             class="fa fa-edit"></i></button>
-        <button (click)="deleteUser(user.identifiant)" class="btn btn-danger" style="margin-right:10px ;"><i
+        <button (click)="showModaldeleteUser(user.identifiant)" class="btn btn-danger" style="margin-right:10px;"><i
             class="fa fa-trash"></i></button>
         <button class="btn btn-warning " style="margin-right:10px ;"><i class="fa fa-bars"></i></button>
       </td>
@@ -60,7 +60,7 @@
 </table>
 
 <!-- **********************************************************modal-Editer  programme********************************** -->
-<div class="modal fade" id="ModalEditSPRG" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModal}"
+<div class="modal fade" id="ModalEditSPRG" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModaledit}"
   aria-hidden="true" aria-labelledby="addModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -122,18 +122,38 @@
             </div>
           </div>
         </form>
-
       </div>
       <div class="modal-footer ">
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" (click)="showModal=false"> حفظ</button>
-        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true" (click)="showModal=false">
+        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" (click)="updateUser()"> حفظ</button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true" (click)="showModaledit=false">
           الغاء</button>
-
       </div>
-
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
+<div id="ModaldeleteConfirm" class="modal fade"  [ngClass]="{'show': showModaldelete}"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <i class="fa fa-trash"></i>
+        </div>
+        <div class="modal-title">
+            </div>
+        <div class="modal-body">
+           هل تريد حذف المعطى الحالي؟
+           <div class="form-group">
+            
+            <input type="hidden" class="form-control" id="identifiant" 
+              [(ngModel)]="iduserdelete" name="identifiant">
+        </div>
+          </div>
+        <div class="modal-footer">
+        <Button ID="btnDeletePRG"  Class="btn btn-danger " (click)="deleteUser()"> حذف</Button>
+        <button type="button" class="btn btn-dark"  (click)="showModaldelete=false">إلغاء</button>       
+        </div>
+    </div>
+</div>
+</div>
+<button type="button" class="btn btn-danger"  (click)="ngOnInit()">refresh</button>

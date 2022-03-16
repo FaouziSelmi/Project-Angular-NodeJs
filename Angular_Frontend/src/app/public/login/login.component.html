@@ -1,25 +1,21 @@
+<button type="button" class="btn btn-danger"   (click)="showModal=true">Cliquez pour ouvrir le modal</button>
 
-  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary"  (click)="showModal=true"  >
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal " id="exampleModal"  [ngClass]="{'show':showModal}" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+<div id="ModaldeleteConfirm" class="modal fade"  [ngClass]="{'show': showModal}"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <i class="fa fa-trash"></i>
         </div>
-
+        <div class="modal-title">
+            </div>
         <div class="modal-body">
-          ...
-        </div>
-
+           هل تريد حذف المعطى الحالي؟</div>
         <div class="modal-footer">
-          <button type="button"  (click)="showModal=false" class="btn btn-secondary" >Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+        <Button ID="btnDeletePRG"  Text="موافق" Class="btn btn-danger " > حذف</Button>
+            <button type="button" class="btn btn-dark" >
+                إلغاء</button>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+</div>

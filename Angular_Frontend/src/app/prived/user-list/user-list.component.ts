@@ -9,9 +9,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  showModal: boolean;
+  showModaledit: boolean;
+  showModaldelete:boolean
+  iduserdelete:number;
   p:number=1;
-users : User[];
+users :any=[];
 userEdit: User=new User();
   constructor( private userService: UserService, private router: Router) { }
 
@@ -27,13 +29,25 @@ userEdit: User=new User();
     }
 
 
-    updateUser(id:number){
-      this.router.navigate(['edituser', id])
+    updateUser(){
+      this.userService.updateUser(this.userEdit).subscribe((resultat)=>{
+        this.ngOnInit();
+      });
+      this.showModaledit=false; 
       }
 
-      deleteUser(id:number){
-
+      showModaldeleteUser(id :number){
+        this.iduserdelete=id;
+        this.showModaldelete=true;
       }
+      deleteUser(){
+        this.userService.deleteUser(this.iduserdelete).subscribe((resultat)=>{
+        // this.users = this.users.filter(item => item.identifiant !== this.iduserdelete);
+        this.ngOnInit();
+        });
+        this.showModaldelete=false; 
+      }
+
       showModalEdit(user: User){
          this.userEdit.identifiant=user.identifiant;
          this.userEdit.prenom=user.prenom;
@@ -42,7 +56,7 @@ userEdit: User=new User();
          this.userEdit.password=user.password;
          this.userEdit.roleuser=user.roleuser;
          this.userEdit.idDir=user.idDir;
-        this.showModal=true
+        this.showModaledit=true
       }
 
       

@@ -11,12 +11,15 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UpdateUserComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     Ng2OrderModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
     
   ],
   providers: [],

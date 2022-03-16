@@ -7,10 +7,19 @@ import { User } from '../entity/user';
   providedIn: 'root'
 })
 export class UserService {
-  private baseURLget="http://localhost:3000/users";
+  private baseURL="http://localhost:3000/";
   constructor(private httpClient: HttpClient) { }
 
   getUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]> (`${this.baseURLget}`);
+    return this.httpClient.get<User[]> (`${this.baseURL}`+ 'users');
   }
+
+  deleteUser(id:number): Observable<Object>{ 
+    return this.httpClient.delete(`${this.baseURL}`+'users',{"body":{"id":id}});
+   }
+
+   updateUser(user:User): Observable<Object>{
+    // console.log (user)
+    return this.httpClient.put(`${this.baseURL}`+'users',user);
+   }
 }
