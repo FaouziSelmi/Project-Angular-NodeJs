@@ -73,12 +73,13 @@
       </div>
 
       <div class="modal-body" style="overflow: auto">
-        <form>
+        <form >
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control"  name="identifiant"
+              <input type="text" class="form-control"  name="identifiant" id="identifiant"  required #name="ngModel"
               [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" >
+              
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
@@ -149,56 +150,56 @@
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control"  name="identifiant"
+              <input type="text" class="form-control"  name="identifiant" 
               [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" disabled>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="prenom"  name="prenom"
+              <input type="text" class="form-control" id="prenomedit"  name="prenom"
               [(ngModel)]="user.prenom" placeholder="  الاسم">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="nom" name="nom"
+              <input type="text" class="form-control" id="nomedit" name="nom"
               [(ngModel)]="user.nom" placeholder="  اللقب">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="email" name="email"
+              <input type="email" class="form-control" id="emailedit" name="email"
               [(ngModel)]="user.email" placeholder="البريد الالكتروني">
             </div>
           </div>
           <div class="form-group row"  style="margin-bottom: 10px;">
             <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="password" name="password"
+              <input type="password" class="form-control" id="passwordedit" name="password"
               [(ngModel)]="user.password" placeholder="كلمة العبور">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="roleuser" name="roleuser"
+              <input type="text" class="form-control" id="roleuseredit" name="roleuser"
               [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="dir" name="dir"
+              <input type="text" class="form-control" id="diredit" name="dir"
               [(ngModel)]="user.idDir" placeholder="  الادارة">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer ">
-        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" (click)="updateUser()"> حفظ</button>
+        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" (click)="updateUser()"> تحيين</button>
         <button class="btn btn-dark" data-dismiss="modal" aria-hidden="true" (click)="closeModalEdit()">
           الغاء</button>
       </div>

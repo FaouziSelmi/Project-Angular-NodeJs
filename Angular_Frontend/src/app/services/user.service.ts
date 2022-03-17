@@ -14,7 +14,7 @@ export class UserService {
     return this.httpClient.get<User[]> (`${this.baseURL}`+ 'users');
   }
   addUser(user:User): Observable<object>{
-    console.log (user)
+   // console.log (user)
     return this.httpClient.post(`${this.baseURL}`+'users',user);
   }
   updateUser(user:User): Observable<Object>{

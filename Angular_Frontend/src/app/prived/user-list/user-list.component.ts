@@ -36,7 +36,8 @@ user: User=new User();
        
       })
       //error =>console.log(error));
-      this.showModaladd=false;     
+      this.showModaladd=false; 
+      this.user=new User();    
     }
     updateUser(){
       this.userService.updateUser(this.user).subscribe((resultat)=>{
