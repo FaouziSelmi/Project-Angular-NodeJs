@@ -5,14 +5,33 @@ const router= express.Router();
 const dbConnection= require('../connection/connection');
 
 router.get('/users', (req,res) =>{
-    dbConnection.query('select * from users', (err, rows, fields)=>{
+    let sqlquery='select * from users U \
+    inner join direction d \
+    where U.idDir=D.idDir; select * from direction';
+    dbConnection.query(sqlquery, (err, rows, fields)=>{
         if(!err){
-            res.json(rows);
+             res.json(rows);
+           // res.json(rows[1]);
+           
         }else{
             console.log(err);
         }
     })
 });
+// router.get('/users/:idDir', (req,res) =>{
+//     let sqlquery='select * from users U \
+//     inner join direction d \
+//     where U.idDir=D.idDir; select * from direction';
+//     dbConnection.query(sqlquery, (err, rows, fields)=>{
+//         if(!err){
+//              res.json(rows);
+//            // res.json(rows[1]);
+           
+//         }else{
+//             console.log(err);
+//         }
+//     })
+// });
 router.post('/users', (req, res)=> {
     sqlquery=`insert into users(identifiant,nom,prenom,email,password,idDir,roleuser) values
     ("${req.body.identifiant}","${req.body.nom}","${req.body.prenom}","${req.body.email}",

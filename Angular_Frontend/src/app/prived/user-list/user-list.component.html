@@ -1,9 +1,9 @@
 <h1 class="text-center">قائمة المستعملين</h1>
-<h5>اضافة مستعمل 
+<h5> اضافة مستعمل جديد
   <button type="button" class="btn btn-success"  (click)="showModaladd=true"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
 </h5>
 
-<!-- 
+ 
 <div class="card">
 
   <div id="collapseTwo" class="collapse1" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -19,7 +19,7 @@
     </div> 
   </div>
 
-</div> -->
+</div> 
 
 <!-- <nav class="navbar">
   <input class="form-control" type="text" name="firstName" [(ngModel)]="firstName" 
@@ -36,20 +36,21 @@
       <th>البريد الالكتروني</th>
       <th>كلمة العبور</th>
       <th>دور المستخدم</th>
-      <th style="display: none2;">رمز الادارة</th>
+      <th style="display: none1;">رمز الادارة</th>
+      <th> الادارة</th>
       <th>خيارات</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of users  | orderBy: key: reverse | paginate:{itemsPerPage:4, currentPage:p}">
-      <td>{{user.identifiant}}</td>
+      <td style="width: 100px;">{{user.identifiant}}</td>
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
       <td>{{user.email}}</td>
       <td>{{user.password}}</td>
       <td>{{user.roleuser}}</td>
-      <td style="display: none2;">{{user.idDir}}</td>
-      <!-- <td>{{user.nomDir}}</td> -->
+      <td style="display: none1;">{{user.idDir}}</td>
+       <td>{{user.nomDir}}</td> 
       <td>
         <button (click)="showModalEdit(user)" class="btn btn-info" data-toggle="tooltip" title="تحيين "><i
             class="fa fa-edit"></i></button>
@@ -59,8 +60,11 @@
       </td>
     </tr>
   </tbody>
-  <pagination-controls (pageChange)="p = $event" previousLabel="&lsaquo;" nextLabel="&rsaquo;"></pagination-controls>
+  <!-- <pagination-controls (pageChange)="p = $event" previousLabel="&lsaquo;" nextLabel="&rsaquo;"></pagination-controls> -->
 </table>
+<pagination-controls (pageChange)="p = $event" previousLabel="السابقة" nextLabel="التالية"></pagination-controls>
+
+
 <!-- **********************************************************modal-Add  ********************************** -->
 <div class="modal fade" id="Modaladd" runat="server" tabindex="-1" role="dialog" [ngClass]="{'show':showModaladd}"
   aria-hidden="true" aria-labelledby="addModalLabel" data-backdrop="static" data-keyboard="false">
@@ -73,62 +77,71 @@
       </div>
 
       <div class="modal-body" style="overflow: auto">
-        <form >
+        <form #userForm="ngForm"  
+        (ngSubmit)="addUser(userForm.value.identifiant,userForm.value.prenom, 
+                            userForm.value.nom,userForm.value.email,userForm.value.password,userForm.value.idDir,userForm.value.roleuser )">
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control"  name="identifiant" id="identifiant"  required #name="ngModel"
+              <input type="number" class="form-control"  name="identifiant" id="identifiant"  required   #identifiant="ngModel"
               [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" >
-              
+              <div *ngIf="identifiant.touched && identifiant.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="prenom"  name="prenom"
+              <input type="text" class="form-control" id="prenom"  name="prenom" required   #prenom="ngModel" 
               [(ngModel)]="user.prenom" placeholder="  الاسم">
+              <div *ngIf="prenom.touched && prenom.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="nom" name="nom"
+              <input type="text" class="form-control" id="nom" name="nom" required   #nom="ngModel"
               [(ngModel)]="user.nom" placeholder="  اللقب">
+              <div *ngIf="nom.touched && nom.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="email" name="email"
+              <input type="email" class="form-control" id="email" name="email" required   #email="ngModel"  ngModel email
               [(ngModel)]="user.email" placeholder="البريد الالكتروني">
+              <div *ngIf="email.touched && email.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row"  style="margin-bottom: 10px;">
             <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="password" name="password"
+              <input type="password" class="form-control" id="password" name="password" required   #password="ngModel"
               [(ngModel)]="user.password" placeholder="كلمة العبور">
+              <div *ngIf="password.touched && password.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="roleuser" name="roleuser"
+              <input type="text" class="form-control" id="roleuser" name="roleuser" required   #roleuser="ngModel"
               [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
+              <div *ngIf="roleuser.touched && roleuser.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
-          <div class="form-group row" style="margin-bottom: 10px;">
-            <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
+          <div class="form-group row">
+            <label for="idDir" class="col-sm-2 col-form-label"> الادارة </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="dir" name="dir"
-              [(ngModel)]="user.idDir" placeholder="  الادارة">
-            </div>
+              <select  [(ngModel)]="user.idDir" class="input"  name="idDir"  id="idDir"  class="form-select"  required #direction="ngModel"  >
+                <option *ngFor="let direction of directions"  value="{{direction.idDir}}">{{direction.nomDir}}</option>
+              </select>
+              <div *ngIf="direction.touched && direction.invalid" class="alert-danger"> هذا الحقل اجباري </div>
+          </div>
           </div>
         </form>
       </div>
       <div class="modal-footer ">
-        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" (click)="addUser()"> حفظ</button>
-        <button class="btn btn-dark" data-dismiss="modal" aria-hidden="true" (click)="showModaladd=false">
+        <button class="btn btn-success" aria-hidden="true"  [disabled]="userForm.invalid"> حفظ</button>
+        <button class="btn btn-dark"  aria-hidden="true" (click)="closeModal()">
           الغاء</button>
       </div>
     </div>
@@ -150,75 +163,82 @@
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control"  name="identifiant" 
-              [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" disabled>
+              <input type="number" class="form-control"  name="identifiant" id="identifiantedit"  disabled
+              [(ngModel)]="user.identifiant" placeholder=" المعرف الوحيد" >
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="prenomedit"  name="prenom"
+              <input type="text" class="form-control" id="prenomedit"  name="prenom" required   #prenom="ngModel" 
               [(ngModel)]="user.prenom" placeholder="  الاسم">
+              <div *ngIf="prenom.touched && prenom.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="nomedit" name="nom"
+              <input type="text" class="form-control" id="nomedit" name="nom" required   #nom="ngModel"
               [(ngModel)]="user.nom" placeholder="  اللقب">
+              <div *ngIf="nom.touched && nom.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="emailedit" name="email"
+              <input type="email" class="form-control" id="emailedit" name="email" required   #email="ngModel"  ngModel email
               [(ngModel)]="user.email" placeholder="البريد الالكتروني">
+              <div *ngIf="email.touched && email.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row"  style="margin-bottom: 10px;">
             <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="passwordedit" name="password"
+              <input type="password" class="form-control" id="passwordedit" name="password" required   #password="ngModel"
               [(ngModel)]="user.password" placeholder="كلمة العبور">
+              <div *ngIf="password.touched && password.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="roleuseredit" name="roleuser"
+              <input type="text" class="form-control" id="roleuseredit" name="roleuser" required   #roleuser="ngModel"
               [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
+              <div *ngIf="roleuser.touched && roleuser.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
-          <div class="form-group row" style="margin-bottom: 10px;">
-            <label for="dir" class="col-sm-2 col-form-label">الادارة </label>
+          <div class="form-group row">
+            <label for="idDir" class="col-sm-2 col-form-label"> الادارة </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="diredit" name="dir"
-              [(ngModel)]="user.idDir" placeholder="  الادارة">
-            </div>
+              <select  [(ngModel)]="user.idDir" class="input"  name="idDir"  id="idDir"  class="form-select"  required #direction="ngModel"  >
+                <option *ngFor="let direction of directions"  value="{{direction.idDir}}">{{direction.nomDir}}</option>
+              </select>
+              <div *ngIf="direction.touched && direction.invalid" class="alert-danger"> هذا الحقل اجباري </div>
+          </div>
           </div>
         </form>
       </div>
       <div class="modal-footer ">
-        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" (click)="updateUser()"> تحيين</button>
-        <button class="btn btn-dark" data-dismiss="modal" aria-hidden="true" (click)="closeModalEdit()">
+        <button class="btn btn-success" aria-hidden="true" (click)="updateUser()"  > حفظ</button>
+        <button class="btn btn-dark"  aria-hidden="true" (click)="closeModal()">
           الغاء</button>
       </div>
     </div>
   </div>
 </div>
 <!-- **********************************************************modal-confirm delete  ********************************** -->
-<div id="ModaldeleteConfirm" class="modal fade"  [ngClass]="{'show': showModaldelete}"
+<div id="ModaldeleteConfirm" class="modal  fade"  [ngClass]="{'show': showModaldelete}"
 aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
-        <div class="modal-header">
+        <!-- <div class="modal-header bg-danger">
           <i class="fa fa-trash"></i>
         </div>
         <div class="modal-title">
-            </div>
+            </div> -->
         <div class="modal-body">
-           هل تريد حذف المعطى الحالي؟
-           <div class="form-group">
+          <div class="alert alert-danger">  <i class="fa fa-trash"></i>هل تريد حذف المعطى الحالي؟</div>
+            <div class="form-group">
             
             <input type="hidden" class="form-control" id="identifiant" 
               [(ngModel)]="iduserdelete" name="identifiant">

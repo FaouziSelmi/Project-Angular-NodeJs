@@ -1,3 +1,5 @@
+import { Direction } from "./direction";
+
 export class User {
    identifiant:number;
    nom: string;
@@ -5,6 +7,6 @@ export class User {
    email:string;
    password:string;
    roleuser: string;
-   idDir: number;
-
+   idDir:number;
+   nomDir:string;
 }

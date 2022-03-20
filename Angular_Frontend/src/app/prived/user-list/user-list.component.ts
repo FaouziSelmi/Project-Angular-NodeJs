@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Direction } from 'src/app/entity/direction';
 import { User } from 'src/app/entity/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,6 +16,8 @@ export class UserListComponent implements OnInit {
   showModaladd:boolean;
   p:number=1;
 users :any=[];
+//directions: Direction[];  erreur ????
+directions: any=[]
 user: User=new User();
   constructor( private userService: UserService, private router: Router) { }
 
@@ -24,12 +27,14 @@ user: User=new User();
 
   private getUsersList(){
     this.userService.getUsers().subscribe(data=>{
-      this.users=data;
-     // console.log(data);
+      this.users=data[0];
+      this.directions=data[1];
+     //console.log(data);
     })
     }
 
-    addUser(){
+    addUser(identifiant: any, nom:any, prenom: any, email:any, password:any, idDir:any, roleuser:any){
+      console.log (this.user)
       this.userService.addUser(this.user).subscribe(data =>{
        // console.log(JSON.parse(JSON.stringify(data)));
        this.ngOnInit();
@@ -53,7 +58,7 @@ user: User=new User();
       }
       deleteUser(){
         this.userService.deleteUser(this.iduserdelete).subscribe((resultat)=>{
-        // this.users = this.users.filter(item => item.identifiant !== this.iduserdelete);
+        // this.users = this.users.filter(item => item.identifiant !== this.iduserdelete); ok fonctionnel 
         this.ngOnInit();
         });
         this.showModaldelete=false; 
@@ -69,8 +74,9 @@ user: User=new User();
          this.user.idDir=user.idDir;
         this.showModaledit=true
       }
-    closeModalEdit(){
+    closeModal(){
       this.showModaledit=false;
+      this.showModaladd=false;
       this.user=new User();
     }
       
@@ -83,6 +89,9 @@ user: User=new User();
     //     });
     //   }
     // }
+    getEmployeByDir(identifiant: string){
+
+    }
     key: string='id';
     reverse: boolean=false;
     sort(key){
