@@ -19,6 +19,7 @@ export class UserListComponent implements OnInit {
   msg:string;
   p:number=1;
 users :any=[];
+usersForfilter :any=[];
 //directions: Direction[];  erreur ????
 directions: any=[]
 user: User=new User();
@@ -31,6 +32,7 @@ user: User=new User();
   private getUsersList(){
     this.userService.getUsers().subscribe(data=>{
       this.users=data[0];
+      this.usersForfilter=data[0];
       this.directions=data[1];
      //console.log(data);
     })
@@ -88,23 +90,36 @@ user: User=new User();
       this.showModaladd=false;
       this.user=new User();
     }
-      
-    // search(){
-    //   if (this.firstName==""){
-    //          this.ngOnInit();
-    //   }else{
-    //     this.employees=this.employees.filter(res =>{
-    //       return res.firstName.toLocaleLowerCase().match(this.firstName.toLocaleLowerCase());
-    //     });
-    //   }
-    // }
-    getEmployeByDir(identifiant: string){
-
+    identifiantSearch:number
+    searchByIdentifiant(){
+      if (this.identifiantSearch==null){
+        this.users = this.usersForfilter;
+      }else{
+        this.users = this.usersForfilter.filter(item => item.identifiant == this.identifiantSearch);
+      }
+    }
+    filterUserByDir(idDir: string){
+     
+      if (idDir !="null"){
+        this.users = this.usersForfilter.filter(item => item.idDir == idDir);
+      }else{
+        this.users=this.usersForfilter;
+      }
     }
     key: string='id';
     reverse: boolean=false;
     sort(key){
       this.key=key;
       this.reverse=!this.reverse
+    }
+    firstName: any
+    searchByFirstName(){
+      if (this.firstName==""){
+             this.ngOnInit();
+      }else{
+        this.users=this.users.filter(res =>{
+          return res.firstName.toLocaleLowerCase().match(this.firstName.toLocaleLowerCase());
+        });
+      }
     }
 }

@@ -8,48 +8,50 @@
 
   <div id="collapseTwo" class="collapse1" aria-labelledby="headingTwo" data-parent="#accordionExample">
     <div class="card-body">
-
-      <div class="col-md-3 offset-md-3">
-      <select   class="input "  name="idDir"  id="idDir"  class="form-select"  #mySelect
-      (change)='getEmployeByDir(mySelect.value)' >
+      <div class="form-group row" >
+      <div class="col-md-3">
+      <select   class="input "  name="idDir"  id="idDir"  class="form-select"  #mySelect 
+      (change)='filterUserByDir(mySelect.value)' >
       <option   value="null" >اختيار ادارة</option>
         <option *ngFor="let direction of directions"  value="{{direction.idDir}}" >{{direction.nomDir}}</option>
       </select>
     </div> 
+    <div class="col-md-4">
+    <input class="form-control" type="number" name="idfSearch"  [(ngModel)]="identifiantSearch"
+  (ngModelChange)="searchByIdentifiant()" placeholder=" بحث بالإستعمال المعرف الوحيد">
     </div> 
+    <div class="col-md-4">
+      <input class="form-control" type="text" name="firstNamesersh" [(ngModel)]="firstName" 
+    (ngModelChange)="searchByFirstName()" placeholder=" بحث بالإستعمال الإسم">
+      </div> 
   </div>
-
+</div>
+</div>
 </div> 
-
-<!-- <nav class="navbar">
-  <input class="form-control" type="text" name="firstName" [(ngModel)]="firstName" 
-  (ngModelChange)="search()" placeholder=" entrer first name to search">
-  
-</nav> -->
 
 <table class="table table-striped ">
   <thead>
     <tr>
       <th (click)="sort('id')">المعرف &nbsp;<i class="fa fa-sort"></i></th>
-      <th>الاسم &nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('firstName')">الاسم &nbsp;<i class="fa fa-sort"></i></th>
       <th>اللقب</th>
       <th>البريد الالكتروني</th>
       <th>كلمة العبور</th>
       <th>دور المستخدم</th>
-      <th style="display: none1;">رمز الادارة</th>
+      <th style="display: none;">رمز الادارة</th>
       <th> الادارة</th>
       <th>خيارات</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users  | orderBy: key: reverse | paginate:{itemsPerPage:4, currentPage:p}">
+    <tr *ngFor="let user of users  | orderBy: key: reverse | paginate:{itemsPerPage:4, currentPage:p} ">
       <td style="width: 100px;">{{user.identifiant}}</td>
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
       <td>{{user.email}}</td>
       <td>{{user.password}}</td>
       <td>{{user.roleuser}}</td>
-      <td style="display: none1;">{{user.idDir}}</td>
+      <td style="display: none;">{{user.idDir}}</td>
        <td>{{user.nomDir}}</td> 
       <td>
         <button (click)="showModalEdit(user)" class="btn btn-info" data-toggle="tooltip" title="تحيين "><i
@@ -218,7 +220,7 @@
       </div>
       <div class="modal-footer ">
         <button class="btn btn-success" aria-hidden="true" [disabled]="userFormEdit.invalid"> حفظ</button>
-        <button class="btn btn-dark"  aria-hidden="true" (click)="closeModal()">
+        <button class="btn btn-dark"  type="reset"  aria-hidden="true" (click)="closeModal()">
           الغاء</button>
       </div>
     </form>
