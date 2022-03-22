@@ -62,7 +62,7 @@
   </tbody>
   <!-- <pagination-controls (pageChange)="p = $event" previousLabel="&lsaquo;" nextLabel="&rsaquo;"></pagination-controls> -->
 </table>
-<pagination-controls (pageChange)="p = $event" previousLabel="السابقة" nextLabel="التالية"></pagination-controls>
+<pagination-controls (pageChange)="p = $event" previousLabel="السابقة" nextLabel="التالية"  ></pagination-controls>
 
 
 <!-- **********************************************************modal-Add  ********************************** -->
@@ -75,11 +75,9 @@
           <i class="fa fa-plus-square"></i>   اضافة مستعمل
         </h4>
       </div>
-
+      <form #userForm="ngForm"  
+      (ngSubmit)="addUser(userForm)">
       <div class="modal-body" style="overflow: auto">
-        <form #userForm="ngForm"  
-        (ngSubmit)="addUser(userForm.value.identifiant,userForm.value.prenom, 
-                            userForm.value.nom,userForm.value.email,userForm.value.password,userForm.value.idDir,userForm.value.roleuser )">
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
@@ -137,13 +135,13 @@
               <div *ngIf="direction.touched && direction.invalid" class="alert-danger"> هذا الحقل اجباري </div>
           </div>
           </div>
-        </form>
       </div>
       <div class="modal-footer ">
         <button class="btn btn-success" aria-hidden="true"  [disabled]="userForm.invalid"> حفظ</button>
-        <button class="btn btn-dark"  aria-hidden="true" (click)="closeModal()">
+        <button class="btn btn-dark"  type="reset"    (click)="closeModal()">
           الغاء</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
@@ -157,9 +155,9 @@
           <i class="far fa-edit"></i> تحيين بيانات المستعمل
         </h4>
       </div>
-
+      <form #userFormEdit="ngForm"  
+      (ngSubmit)="updateUser(userFormEdit)">
       <div class="modal-body" style="overflow: auto">
-        <form>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="identifiant" class="col-sm-2 col-form-label">المعرف </label>
             <div class="col-sm-5">
@@ -170,65 +168,66 @@
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="prenom" class="col-sm-2 col-form-label">الاسم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="prenomedit"  name="prenom" required   #prenom="ngModel" 
+              <input type="text" class="form-control" id="prenomedit"  name="prenom"  required   #prenomEdit="ngModel" 
               [(ngModel)]="user.prenom" placeholder="  الاسم">
-              <div *ngIf="prenom.touched && prenom.invalid" class="alert-danger">هذا الحقل اجباري </div>
+              <div *ngIf="prenomEdit.touched && prenomEdit.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="nom" class="col-sm-2 col-form-label">اللقب </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="nomedit" name="nom" required   #nom="ngModel"
+              <input type="text" class="form-control" id="nomedit" name="nom" required   #nomEdit="ngModel"
               [(ngModel)]="user.nom" placeholder="  اللقب">
-              <div *ngIf="nom.touched && nom.invalid" class="alert-danger">هذا الحقل اجباري </div>
+              <div *ngIf="nomEdit.touched && nomEdit.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="email" class="col-sm-2 col-form-label">البريد الالكتروني</label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="emailedit" name="email" required   #email="ngModel"  ngModel email
+              <input type="email" class="form-control" id="emailedit" name="email" required   #emailEdit="ngModel"  ngModel email
               [(ngModel)]="user.email" placeholder="البريد الالكتروني">
-              <div *ngIf="email.touched && email.invalid" class="alert-danger">هذا الحقل اجباري </div>
+              <div *ngIf="emailEdit.touched && emailEdit.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row"  style="margin-bottom: 10px;">
             <label for="password" class="col-sm-2 col-form-label">كلمة العبور</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="passwordedit" name="password" required   #password="ngModel"
+              <input type="password" class="form-control" id="passwordedit" name="password" required   #passwordEdit="ngModel"
               [(ngModel)]="user.password" placeholder="كلمة العبور">
-              <div *ngIf="password.touched && password.invalid" class="alert-danger">هذا الحقل اجباري </div>
+              <div *ngIf="passwordEdit.touched && passwordEdit.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row" style="margin-bottom: 10px;">
             <label for="roleuser" class="col-sm-2 col-form-label">دور المستخدم </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="roleuseredit" name="roleuser" required   #roleuser="ngModel"
+              <input type="text" class="form-control" id="roleuseredit" name="roleuser" required   #roleuserEdit="ngModel"
               [(ngModel)]="user.roleuser" placeholder=" دور المستخدم ">
-              <div *ngIf="roleuser.touched && roleuser.invalid" class="alert-danger">هذا الحقل اجباري </div>
+              <div *ngIf="roleuserEdit.touched && roleuserEdit.invalid" class="alert-danger">هذا الحقل اجباري </div>
             </div>
           </div>
           <div class="form-group row">
             <label for="idDir" class="col-sm-2 col-form-label"> الادارة </label>
             <div class="col-sm-5">
-              <select  [(ngModel)]="user.idDir" class="input"  name="idDir"  id="idDir"  class="form-select"  required #direction="ngModel"  >
+              <select  [(ngModel)]="user.idDir" class="input"  name="idDirEdit"  id="idDirEdit"  class="form-select"  required #directionEdit="ngModel"  >
                 <option *ngFor="let direction of directions"  value="{{direction.idDir}}">{{direction.nomDir}}</option>
               </select>
-              <div *ngIf="direction.touched && direction.invalid" class="alert-danger"> هذا الحقل اجباري </div>
+              <div *ngIf="directionEdit.touched && directionEdit.invalid" class="alert-danger"> هذا الحقل اجباري </div>
           </div>
           </div>
-        </form>
+       
       </div>
       <div class="modal-footer ">
-        <button class="btn btn-success" aria-hidden="true" (click)="updateUser()"  > حفظ</button>
+        <button class="btn btn-success" aria-hidden="true" [disabled]="userFormEdit.invalid"> حفظ</button>
         <button class="btn btn-dark"  aria-hidden="true" (click)="closeModal()">
           الغاء</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
 <!-- **********************************************************modal-confirm delete  ********************************** -->
 <div id="ModaldeleteConfirm" class="modal  fade"  [ngClass]="{'show': showModaldelete}"
-aria-hidden="true">
+aria-hidden="true"  appOutside (click)="showModaldelete=false">
 <div class="modal-dialog">
     <div class="modal-content">
         <!-- <div class="modal-header bg-danger">
@@ -247,6 +246,28 @@ aria-hidden="true">
         <div class="modal-footer">
         <Button ID="btnDeletePRG"  Class="btn btn-danger " (click)="deleteUser()"> حذف</Button>
         <button type="button" class="btn btn-dark"  (click)="showModaldelete=false">إلغاء</button>       
+        </div>
+    </div>
+</div>
+</div>
+<!-- **********************************************************modal-Notification  ********************************** -->
+<div id="ModaldeleteConfirm" class="modal  fade"  [ngClass]="{'show': showModalNotification}"
+aria-hidden="true"   appOutside (click)="showModalNotification=false">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+          <div class="alert alert-success"> <i class="fas fa-check-double"></i>{{msg}}</div>
+            <div class="form-group">
+            
+            <input type="hidden" class="form-control" id="identifiant" 
+              [(ngModel)]="iduserdelete" name="identifiant">
+        </div>
+          </div>
+        <div class="modal-footer text-center">
+        <!-- <Button ID="btnDeletePRG"  Class="btn btn-danger " (click)="deleteUser()"> حذف</Button> -->
+        <div class="col-md-12 text-center">
+          <button type="button" class="btn btn-success  text-center"  (click)="showModalNotification=false">موافق</button>     
+        </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgControlStatusGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Direction } from 'src/app/entity/direction';
 import { User } from 'src/app/entity/user';
@@ -14,6 +15,8 @@ export class UserListComponent implements OnInit {
   showModaldelete:boolean
   iduserdelete:number;
   showModaladd:boolean;
+  showModalNotification: boolean;
+  msg:string;
   p:number=1;
 users :any=[];
 //directions: Direction[];  erreur ????
@@ -33,23 +36,27 @@ user: User=new User();
     })
     }
 
-    addUser(identifiant: any, nom:any, prenom: any, email:any, password:any, idDir:any, roleuser:any){
-      console.log (this.user)
+    addUser(userForm: NgForm){
+     // console.log (this.user)
       this.userService.addUser(this.user).subscribe(data =>{
        // console.log(JSON.parse(JSON.stringify(data)));
        this.ngOnInit();
        
       })
       //error =>console.log(error));
-      this.showModaladd=false; 
+      this.showModaladd=false;
+      this.msg=" تم اضافة مستعمل جديد :)"
+      this.showModalNotification=true; 
       this.user=new User();    
     }
-    updateUser(){
+    updateUser(userFormEdit: NgForm){
       this.userService.updateUser(this.user).subscribe((resultat)=>{
         this.ngOnInit();
         this.user=new User();
       });
-      this.showModaledit=false; 
+      this.showModaledit=false;
+      this.msg=" تم تحيين المعطى الحالي :)"
+      this.showModalNotification=true; 
       }
 
       showModaldeleteUser(id :number){
@@ -61,7 +68,9 @@ user: User=new User();
         // this.users = this.users.filter(item => item.identifiant !== this.iduserdelete); ok fonctionnel 
         this.ngOnInit();
         });
-        this.showModaldelete=false; 
+        this.msg=" تم حذف المعطى الحالي :)"
+        this.showModaldelete=false
+        this.showModalNotification=true; 
       }
 
       showModalEdit(user: User){
