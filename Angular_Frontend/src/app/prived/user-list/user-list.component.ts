@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  firstName: any;
   showModaledit: boolean;
   showModaldelete:boolean
   iduserdelete:number;
@@ -23,6 +24,7 @@ usersForfilter :any=[];
 //directions: Direction[];  erreur ????
 directions: any=[]
 user: User=new User();
+identifiantSearch:number
   constructor( private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -90,7 +92,7 @@ user: User=new User();
       this.showModaladd=false;
       this.user=new User();
     }
-    identifiantSearch:number
+
     searchByIdentifiant(){
       if (this.identifiantSearch==null){
         this.users = this.usersForfilter;
@@ -112,14 +114,12 @@ user: User=new User();
       this.key=key;
       this.reverse=!this.reverse
     }
-    firstName: any
-    searchByFirstName(){
-      if (this.firstName==""){
-             this.ngOnInit();
+   
+    filterUserByPrenom(){
+      if (this.firstName !=""){
+        this.users = this.usersForfilter.filter(item => item.prenom == this.firstName);
       }else{
-        this.users=this.users.filter(res =>{
-          return res.firstName.toLocaleLowerCase().match(this.firstName.toLocaleLowerCase());
-        });
+        this.users=this.usersForfilter;
       }
     }
 }

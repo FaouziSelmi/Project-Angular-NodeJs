@@ -9,20 +9,23 @@
   <div id="collapseTwo" class="collapse1" aria-labelledby="headingTwo" data-parent="#accordionExample">
     <div class="card-body">
       <div class="form-group row" >
+        <div class="col-md-1">
+         <h1 class="col-form-label">بحث</h1> 
+        </div> 
       <div class="col-md-3">
       <select   class="input "  name="idDir"  id="idDir"  class="form-select"  #mySelect 
       (change)='filterUserByDir(mySelect.value)' >
-      <option   value="null" >اختيار ادارة</option>
+      <option   value="null" > حسب الادارة</option>
         <option *ngFor="let direction of directions"  value="{{direction.idDir}}" >{{direction.nomDir}}</option>
       </select>
     </div> 
-    <div class="col-md-4">
+    <div class="col-md-3">
     <input class="form-control" type="number" name="idfSearch"  [(ngModel)]="identifiantSearch"
-  (ngModelChange)="searchByIdentifiant()" placeholder=" بحث بالإستعمال المعرف الوحيد">
+  (ngModelChange)="searchByIdentifiant()" placeholder=" حسب  المعرف الوحيد">
     </div> 
-    <div class="col-md-4">
-      <input class="form-control" type="text" name="firstNamesersh" [(ngModel)]="firstName" 
-    (ngModelChange)="searchByFirstName()" placeholder=" بحث بالإستعمال الإسم">
+    <div class="col-md-3">
+      <input class="form-control" type="text" name="prenomsearch" [(ngModel)]="firstName" 
+    (ngModelChange)="filterUserByPrenom()" placeholder="   حسب الاسم">
       </div> 
   </div>
 </div>
