@@ -4,26 +4,27 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './prived/user-list/user-list.component';
-import{ HttpClientModule,} from '@angular/common/http';
+// import{ HttpClientModule,} from '@angular/common/http';
 import { LoginComponent } from './public/login/login.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MaterialModule } from './material/material.module';
+import { TestmaterielComponent } from './public/testmateriel/testmateriel.component';
+import { InscriptionComponent } from './public/inscription/inscription.component';
 
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSliderModule } from '@angular/material/slider';
-import {MaterialModule} from './material/material.module';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort'
-
+//Providers
+import {JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt'
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     LoginComponent,
+    TestmaterielComponent,
+    InscriptionComponent,
     
     
   ],
@@ -36,15 +37,16 @@ import { MatSortModule } from '@angular/material/sort'
     NgxPaginationModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MaterialModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-    
+    MaterialModule
+  
   ],
-  providers: [],
+  providers: [
+     //JWT
+     {provide: JWT_OPTIONS, useValue:JWT_OPTIONS},
+     JwtHelperService,
+     // Token interceptor
+     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
