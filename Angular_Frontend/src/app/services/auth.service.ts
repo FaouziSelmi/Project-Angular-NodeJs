@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -9,7 +10,8 @@ export class AuthService {
 
   private URL='http://localhost:3000';
   constructor(private http: HttpClient,
-              private jwtHelper: JwtHelperService) { }
+              private jwtHelper: JwtHelperService,
+              private router: Router) { }
 
   login(user:any){
     return this.http.post(`${this.URL}/login`,user);
@@ -25,4 +27,9 @@ export class AuthService {
   }
   return false;
 }
+ public logout(){
+   localStorage.removeItem('token');
+   this.router.navigate(['/login']);
+ }
+
 }
